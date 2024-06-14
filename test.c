@@ -62,7 +62,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-    const wchar_t WClassName[]  = L"WindowClass";
+    const wchar_t WClassName[]  = L"Terraria 2";
     MSG Msg;
     WNDCLASS Window = {};
     Window.lpfnWndProc = WndProc;
@@ -79,7 +79,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     (
         0,
         WClassName,
-        L"Tetris",
+        L"Terraria 2",
         WS_OVERLAPPEDWINDOW,
         200, 10, 960, 720,
         NULL, NULL, hInstance, NULL
