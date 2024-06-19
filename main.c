@@ -8,6 +8,11 @@ gcc main.c -o Ternaria.exe -l gdi32 -l msimg32
 DWORD ThreadID;
 HANDLE Thread;
 
+struct ImportantStuff
+{
+    LList Map;
+} GameData;
+
 //Função da thread principal
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
@@ -27,6 +32,9 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     zombie.img = NULL;
 
     HWND hwnd = *((HWND *)lpParam);
+
+    readFile(&GameData.Map);
+
     while (gameover == 0)
     {
 
@@ -59,7 +67,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-    const wchar_t WClassName[]  = L"Terraria 2";
+    const wchar_t WClassName[]  = L"Ternaria";
     MSG Msg;
     WNDCLASS Window = {};
     Window.lpfnWndProc = WndProc;
