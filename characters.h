@@ -13,6 +13,7 @@ typedef struct zombie
 {
     int life = 10;
     int damage = 0;
+    char * img;
 } zombie;
 
 #endif // !
