@@ -4,7 +4,7 @@
 
 typedef struct SQNode
 {
-    int Value;
+    void * Value;
     struct SQNode * Next;
 } SQNode;
 
@@ -23,7 +23,7 @@ void LStackCreate(LStack * Stack)
     Stack->Head = NULL;
 }
 
-void LStackPush(LStack * Stack, int Value)
+void LStackPush(LStack * Stack, void * Value)
 {
     SQNode * S = (SQNode *) malloc(sizeof(SQNode));
     S->Next = Stack->Head;
@@ -34,7 +34,7 @@ void LStackPush(LStack * Stack, int Value)
 int LStackPop(LStack * Stack)
 {
     SQNode * S = Stack->Head;
-    int Value = S->Value;
+    void * Value = S->Value;
     Stack->Head = Stack->Head->Next;
     free(S);
     return Value;
@@ -54,7 +54,7 @@ void LQueueCreate(LQueue * Queue)
     Queue->Tail = NULL;
 }
 
-void LQueueEnqueue(LQueue * Queue, int Value)
+void LQueueEnqueue(LQueue * Queue, void * Value)
 {
     SQNode * S = (SQNode *) malloc(sizeof(SQNode));
     S->Next = 0;
@@ -70,10 +70,10 @@ void LQueueEnqueue(LQueue * Queue, int Value)
     }
 }
 
-int LQueueDequeue(LQueue * Queue)
+void * LQueueDequeue(LQueue * Queue)
 {
     SQNode * S = Queue->Head;
-    int Value = S->Value;
+    void * Value = S->Value;
     Queue->Head = Queue->Head->Next;
     free(S);
     return Value;
