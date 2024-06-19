@@ -8,7 +8,7 @@ gcc main.c -o Ternaria.exe -l gdi32 -l msimg32
 DWORD ThreadID;
 HANDLE Thread;
 
-
+//Função da thread principal
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
     int gameover = 0;
