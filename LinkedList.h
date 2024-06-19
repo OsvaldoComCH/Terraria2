@@ -4,7 +4,7 @@
 
 typedef struct LLNode
 {
-    int Value;
+    void * Value;
     struct LLNode * Next;
 } LLNode;
 
@@ -20,7 +20,7 @@ void LListCreate(LList * List)
     List->Size = 0;
 }
 
-void LListAdd(LList * List, int Value)
+void LListAdd(LList * List, void * Value)
 {
     LLNode * N = (LLNode *) malloc(sizeof(LLNode));
     N->Value = Value;
@@ -42,7 +42,7 @@ void LListAdd(LList * List, int Value)
     ++List->Size;
 }
 
-int LListGet(LList * List, int index)
+void * LListGet(LList * List, int index)
 {
     if ((unsigned) index >= List->Size)
     {
@@ -57,7 +57,7 @@ int LListGet(LList * List, int index)
     return N->Value;
 }
 
-void LListSet(LList * List, int index, int Value)
+void LListSet(LList * List, int index, void * Value)
 {
     if ((unsigned) index >= List->Size)
     {
