@@ -7,5 +7,9 @@
 
 #include <windows.h>
 #include "VirtualKeyCodes.h"
+#include "Stack&Queue.h"
+#include "LinkedStackQueue.h"
+#include "LinkedList.h"
+#include "QuickSort.h"
 
 #endif
