@@ -1,12 +1,21 @@
 #ifndef BLOCKS
 #define BLOCKS
 #include <stdio.h>
+#include "imports.h"
 
 FILE * archive;
 
-void readArchive()
+LList *readArchive()
 {
-    archive = fopen("Map.txt", );
+    LList *list;
+    LListCreate(list);
+    char line[10];
+    
+    archive = fopen("Map.txt", "r");
+
+    LListAdd(list, (line, 10, archive));
+
+    return list;
 }
 
 typedef struct block
