@@ -66,6 +66,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     Window.hInstance = hInstance;
     Window.lpszClassName = WClassName;
 
+
     if(!RegisterClass(&Window))
     {
         MessageBox(NULL, L"Window Class Registration Failed", L"Error", MB_ICONERROR | MB_OK);
@@ -81,11 +82,24 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         200, 10, 960, 720,
         NULL, NULL, hInstance, NULL
     );
+
     if(hwnd == NULL)
     {
         MessageBox(NULL, L"Window Creation Failed", L"Error", MB_ICONERROR | MB_OK);
         return 0;
     }
+
+    HICON hIcon = (HICON)LoadImage(NULL, L"pixil-frame-0.ico", IMAGE_ICON, 0, 0, LR_LOADFROMFILE);
+    
+    if (hIcon != NULL) {
+        // Definindo o ícone grande da janela
+        SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hIcon);
+        // Definindo o ícone pequeno da janela
+        SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
+    } else {
+        MessageBox(NULL, L"Erro ao carregar o icone!", L"Erro", MB_ICONERROR);
+    }
+    
     
     ShowWindow(hwnd, nCmdShow);
     UpdateWindow(hwnd);
