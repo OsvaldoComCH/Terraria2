@@ -3,15 +3,11 @@
 #include <stdio.h>
 #include "imports.h"
 
-typedef struct block
-{
-    int x;
-    int y;
-    int type;
-} block;
-
 FILE * archive;
 
+/* 
+Função de leitura do arquivo de mapa, fazemos a construção do mapa do Ternaria por meio da leitura desse arquivo.
+*/ 
 LList *readArchive()
 {
     int n1, n2, n3;
@@ -33,6 +29,18 @@ LList *readArchive()
         printf(LListGet(lista, i));
     }
 }
+
+// Estrutura dos blocos, especificando com posição e tipo.
+typedef struct block
+{
+    int x;
+    int y;
+    int type;
+} block;
+
+FILE * archive;
+
+
 
 
 #endif 

@@ -1,3 +1,9 @@
+/*
+
+Essa header possui os itens que serão implementados no jogo
+
+*/
+
 #ifndef ITEMS
 #define ITEMS
 #include "imports.h"

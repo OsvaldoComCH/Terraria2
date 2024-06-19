@@ -8,7 +8,7 @@ gcc main.c -o Ternaria.exe -l gdi32 -l msimg32
 DWORD ThreadID;
 HANDLE Thread;
 
-
+//Função da thread principal
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
     int gameover = 0;
@@ -86,6 +86,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         MessageBox(NULL, L"Window Creation Failed", L"Error", MB_ICONERROR | MB_OK);
         return 0;
     }
+    
     ShowWindow(hwnd, nCmdShow);
     UpdateWindow(hwnd);
 
