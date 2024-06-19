@@ -18,12 +18,12 @@ typedef struct LQueue
     SQNode * Head, * Tail;
 } LQueue;
 
-void CreateLStack(LStack * Stack)
+void LStackCreate(LStack * Stack)
 {
     Stack->Head = NULL;
 }
 
-void Push(LStack * Stack, int Value)
+void LStackPush(LStack * Stack, int Value)
 {
     SQNode * S = (SQNode *) malloc(sizeof(SQNode));
     S->Next = Stack->Head;
@@ -31,7 +31,7 @@ void Push(LStack * Stack, int Value)
     Stack->Head = S;
 }
 
-int Pop(LStack * Stack)
+int LStackPop(LStack * Stack)
 {
     SQNode * S = Stack->Head;
     int Value = S->Value;
@@ -40,21 +40,21 @@ int Pop(LStack * Stack)
     return Value;
 }
 
-void DeleteLStack(LStack * Stack)
+void LStackDelete(LStack * Stack)
 {
     while(Stack->Head != NULL)
     {
-        Pop(Stack);
+        LStackPop(Stack);
     }
 }
 
-void CreateLQueue(LQueue * Queue)
+void LQueueCreate(LQueue * Queue)
 {
     Queue->Head = NULL;
     Queue->Tail = NULL;
 }
 
-void Enqueue(LQueue * Queue, int Value)
+void LQueueEnqueue(LQueue * Queue, int Value)
 {
     SQNode * S = (SQNode *) malloc(sizeof(SQNode));
     S->Next = 0;
@@ -70,7 +70,7 @@ void Enqueue(LQueue * Queue, int Value)
     }
 }
 
-int Dequeue(LQueue * Queue)
+int LQueueDequeue(LQueue * Queue)
 {
     SQNode * S = Queue->Head;
     int Value = S->Value;
@@ -79,11 +79,11 @@ int Dequeue(LQueue * Queue)
     return Value;
 }
 
-void DeleteLQueue(LQueue * Queue)
+void LQueueDelete(LQueue * Queue)
 {
     while(Queue->Head != NULL)
     {
-        Dequeue(Queue);
+        LQueueDequeue(Queue);
     }
 }
 

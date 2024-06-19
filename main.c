@@ -1,3 +1,7 @@
+/* Compile:
+gcc main.c -o Ternaria.exe -l gdi32 -l msimg32
+*/
+
 #include "imports.h"
 
 DWORD ThreadID;
