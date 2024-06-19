@@ -5,6 +5,9 @@
 
 FILE * archive;
 
+/* 
+Função de leitura do arquivo de mapa, fazemos a construção do mapa do Ternaria por meio da leitura desse arquivo.
+*/ 
 LList *readArchive()
 {
     LList *list;
@@ -18,6 +21,7 @@ LList *readArchive()
     return list;
 }
 
+// Estrutura dos blocos, especificando com posição e tipo.
 typedef struct block
 {
     int x;

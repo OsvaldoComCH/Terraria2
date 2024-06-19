@@ -1,3 +1,10 @@
+/*
+
+Essa header possui todos os imports que precisamos, para garantira que não vai dar errado
+
+*/
+
+
 #ifndef IMPORTS_H
 #define IMPORTS_H
 
