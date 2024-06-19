@@ -28,4 +28,3 @@ typedef struct zombie
 } zombie;
 
 #endif
-
