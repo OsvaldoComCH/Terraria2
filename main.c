@@ -3,6 +3,7 @@ gcc main.c -o Ternaria.exe -l gdi32 -l msimg32
 */
 
 #include "imports.h"
+#include "render.c"
 
 DWORD ThreadID;
 HANDLE Thread;
@@ -11,11 +12,24 @@ HANDLE Thread;
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
     int gameover = 0;
-    
+    character player;
+    player.xPos = 10;
+    player.yPos = 10;
+    player.xSubPos = 0;
+    player.ySubPos = 0;
+    player.life = 10;
+    player.damage = 1;
+    player.img = NULL;
+
+    zombie zombie;
+    zombie.life = 12;
+    zombie.damage = 2;
+    zombie.img = NULL;
+
     HWND hwnd = *((HWND *)lpParam);
     while (gameover == 0)
     {
-        
+
     }
     
 }
