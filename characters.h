@@ -20,5 +20,4 @@ typedef struct zombie
     char * img;
 } zombie;
 
-#endif // !
-
+#endif
