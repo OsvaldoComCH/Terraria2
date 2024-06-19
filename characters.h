@@ -5,6 +5,7 @@
 Estrutura dos personagens, especificando posição e subposição.
 A subposição serve para calcular colisões entre personagem e bloco.
 */
+
 typedef struct character
 {
     int xPos, yPos;
@@ -18,6 +19,7 @@ typedef struct character
 /*
 Estrutura do zumbi.
 */
+
 typedef struct zombie
 {
     int life;

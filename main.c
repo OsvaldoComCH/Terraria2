@@ -86,6 +86,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         MessageBox(NULL, L"Window Creation Failed", L"Error", MB_ICONERROR | MB_OK);
         return 0;
     }
+    
     ShowWindow(hwnd, nCmdShow);
     UpdateWindow(hwnd);
 
