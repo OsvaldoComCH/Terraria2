@@ -21,7 +21,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT PS;
             HDC hdc = BeginPaint(hwnd, &PS);
-            Rectangle(hdc, 10, 10, 100, 100);
             EndPaint(hwnd, &PS);
         }
         break;
