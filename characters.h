@@ -1,7 +1,7 @@
 #ifndef CHARACTERS
 #define CHARACTERS
 
-typedef struct character
+typedef struct character;
 {
     int inventory[32];
     int life[10];
@@ -9,7 +9,7 @@ typedef struct character
     char * img;
 } character;
 
-typedef struct zombie
+typedef struct zombie;
 {
     int life = 10;
     int damage = 0;
