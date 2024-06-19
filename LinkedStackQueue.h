@@ -31,7 +31,7 @@ void LStackPush(LStack * Stack, void * Value)
     Stack->Head = S;
 }
 
-int LStackPop(LStack * Stack)
+void * LStackPop(LStack * Stack)
 {
     SQNode * S = Stack->Head;
     void * Value = S->Value;
