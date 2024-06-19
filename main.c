@@ -7,20 +7,6 @@ HANDLE Thread;
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
     HWND hwnd = *((HWND *)lpParam);
-    while(1)
-    {
-        HDC hdc = GetDC(hwnd);
-        if(GetAsyncKeyState(VK_SPACE))
-        {
-        }else
-        {
-            SelectObject(hdc, GetStockObject(DC_BRUSH));
-            SetDCBrushColor(hdc, RGB(255,0,0));
-            Rectangle(hdc, 10, 200, 110, 300);
-        }
-        ReleaseDC(hwnd, hdc);
-        Sleep(100);
-    }
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
