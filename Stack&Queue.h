@@ -9,19 +9,19 @@ typedef struct QS
     int * Pointer;
 } QUEUE, STACK, QS;
 
-void CreateQueue(QUEUE * Queue, int Length)
+void QueueCreate(QUEUE * Queue, int Length)
 {
     Queue->Data = (int *) malloc(Length*sizeof(int));
     Queue->Pointer = Queue->Data;
 }
 
-void Enqueue(QUEUE * Queue, int Item)
+void QueueEnqueue(QUEUE * Queue, int Item)
 {
     *Queue->Pointer = Item;
     ++Queue->Pointer;
 }
 
-int Remove(QUEUE * Queue, int N)
+int QueueRemove(QUEUE * Queue, int N)
 {
     int Value = Queue->Data[N];
     for(int * i = &Queue->Data[N]; i < Queue->Pointer; ++i)
@@ -32,7 +32,7 @@ int Remove(QUEUE * Queue, int N)
     return Value;
 }
 
-int Dequeue(QUEUE * Queue)
+int QueueDequeue(QUEUE * Queue)
 {
     --Queue->Pointer;
     int Value = *Queue->Data;
@@ -43,7 +43,7 @@ int Dequeue(QUEUE * Queue)
     return Value;
 }
 
-void DestroyQueue(QUEUE * Queue)
+void QueueDestroy(QUEUE * Queue)
 {
     free(Queue->Data);
     Queue->Pointer = NULL;
@@ -54,7 +54,7 @@ int QSSize(QS * qs)
     return qs->Pointer - qs->Data;
 }
 
-void CreateStack(STACK * Stack, int Length)
+void StackCreate(STACK * Stack, int Length)
 {
     Stack->Data = (int *) malloc(Length*sizeof(int));
     Stack->Pointer = Stack->Data;
@@ -77,7 +77,7 @@ int StackPeek(STACK * Stack)
     return *(Stack->Pointer-1);
 }
 
-void DestroyStack(STACK * Stack)
+void StackDestroy(STACK * Stack)
 {
     free(Stack->Data);
     Stack->Pointer = NULL;
