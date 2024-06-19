@@ -2,4 +2,5 @@
 
 int main(){
     LList * list = readArchive();
+    printf(list);
 }
