@@ -11,5 +11,8 @@
 #include "LinkedStackQueue.h"
 #include "LinkedList.h"
 #include "QuickSort.h"
+#include "blocks.h"
+#include "characters.h"
+#include "items.h"
 
 #endif

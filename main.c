@@ -10,7 +10,14 @@ HANDLE Thread;
 
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
+    int gameover = 0;
+    
     HWND hwnd = *((HWND *)lpParam);
+    while (gameover == 0)
+    {
+        
+    }
+    
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
