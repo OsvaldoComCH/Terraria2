@@ -3,18 +3,15 @@
 #include <stdio.h>
 #include "imports.h"
 
-FILE * archive;
 
 /* 
 Função de leitura do arquivo de mapa, fazemos a construção do mapa do Ternaria por meio da leitura desse arquivo.
 */ 
-LList *readArchive()
+void readFile(LList * lista)
 {
     int n1, n2, n3;
     int count = 0;
     FILE * File = fopen("Map.txt", "r");
-    LList *lista;
-    LListCreate(lista);
 
     block *bloco;
 
@@ -37,10 +34,5 @@ typedef struct block
     int y;
     int type;
 } block;
-
-FILE * archive;
-
-
-
 
 #endif 
