@@ -9,16 +9,13 @@ gcc main.c -o Ternaria.exe -l gdi32 -l msimg32
 DWORD ThreadID;
 HANDLE Thread;
 
-struct ImportantStuff
-{
-    LList Map;
-} GameData;
 
 //Função da thread principal
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
     HWND hwnd = *((HWND *)lpParam);
 
+    LList Map;
     int gameover = 0;
     character player;
     player.xPos = 10;
@@ -27,22 +24,28 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     player.ySubPos = 0;
     player.life = 10;
     player.damage = 1;
-    player.img = "imagens/Ferzinho.bmp";
+    player.img = L"imagens/Ferzinho2.bmp";
 
     zombie zombie;
     zombie.life = 12;
     zombie.damage = 2;
     zombie.img = NULL;
 
-    LListCreate(&GameData.Map);
-
-    readArchive(&GameData.Map);
-    RenderMap(&GameData.Map, hwnd);
+    LListCreate(&Map);
+    SetThreadPriority(Thread, 2);
+    readArchive(&Map);
+    RenderMap(&Map, hwnd);
     while (gameover == 0)
     {
+        SendMessage(hwnd, WM_SETREDRAW, FALSE, 0);
         input(&player);
-
+        HDC hdc = GetDC(hwnd);
+        DrawImg(hdc, 0, 0, 960, 720, L"imagens/BackGround.bmp");
+        RenderMap(&Map, hwnd);
+        RenderPlayer(&player, hwnd);
+        SendMessage(hwnd, WM_SETREDRAW, TRUE, 0);
         Sleep(20);
+        ReleaseDC(hwnd, hdc);
     }
 }
 
@@ -50,11 +53,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
     switch(Msg)
     {
+        case WM_SETREDRAW:
+        {
+
+        }
+        break;
         case WM_PAINT:
         {
             PAINTSTRUCT PS;
             HDC hdc = BeginPaint(hwnd, &PS);
-            DrawImg(hdc, 0, 0, 960, 720, L"imagens/BackGround.bmp");
+            FillRect(hdc, &PS.rcPaint, CreateSolidBrush(RGB(255,255,255)));
+            //DrawImg(hdc, 0, 0, 960, 720, L"imagens/BackGround.bmp");
             EndPaint(hwnd, &PS);
         }
         break;

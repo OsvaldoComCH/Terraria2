@@ -20,7 +20,7 @@ void MoveRight(character * Player, int Pixels)
     }
 }
 
-void MoveUp(character * Player, int Pixels)
+void MoveDown(character * Player, int Pixels)
 {
     Player->ySubPos -= Pixels;
     if(Player->ySubPos < 0)
@@ -30,7 +30,7 @@ void MoveUp(character * Player, int Pixels)
     }
 }
 
-void MoveDown(character * Player, int Pixels)
+void MoveUp(character * Player, int Pixels)
 {
     Player->ySubPos += Pixels;
     if(Player->ySubPos > 31)

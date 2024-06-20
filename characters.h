@@ -1,6 +1,6 @@
 #ifndef CHARACTERS
 #define CHARACTERS
-
+#include "imports.h"
 /* 
 Estrutura dos personagens, especificando posição e subposição.
 A subposição serve para calcular colisões entre personagem e bloco.
@@ -13,7 +13,7 @@ typedef struct character
     int inventory[32];
     int life;
     int damage;
-    char * img;
+    wchar_t * img;
 } character;
 
 /*
@@ -26,7 +26,7 @@ typedef struct zombie
     int damage;
     int xPos, yPos;
     int xSubPos, ySubPos;
-    char * img;
+    wchar_t * img;
 } zombie;
 
 #endif
