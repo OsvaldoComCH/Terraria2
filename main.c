@@ -21,7 +21,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     int gameover = 0;
     character player;
     player.xPos = 10;
-    player.yPos = 10;
+    player.yPos = 10;   
     player.xSubPos = 0;
     player.ySubPos = 0;
     player.life = 10;
