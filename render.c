@@ -16,6 +16,6 @@ void RenderMap(const LList * Map, HWND hwnd)
 
 void RenderPlayer(const character * Player, HWND hwnd)
 {
-    HDC hdc = GetDC(hwnd)
+    HDC hdc = GetDC(hwnd);
     
 }
