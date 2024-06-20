@@ -8,7 +8,7 @@ void DrawMap(const LList * Map, HWND hwnd)
     for(int i = 0; i < Map->Size; ++i)
     {
         block * B = (block *) N->Value;
-        DrawRect(hdc, B->x*32, 720 - B->y*32, 32, 32, RGB(100, 50, 0));
+        DrawImg(hdc, B->x*32, 649 - (B->y*32), 32, 32, B->img);
         N = N->Next;
     }
     ReleaseDC(hwnd, hdc);
