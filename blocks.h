@@ -18,7 +18,7 @@ void blockDefine(block * B)
 {
     switch (B->type)
     {
-    case 0:
+    case 1:
         B->img = L"imagens/grama.bmp";
         break;
     
