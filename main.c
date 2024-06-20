@@ -33,13 +33,14 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 
     HWND hwnd = *((HWND *)lpParam);
 
-    readFile(&GameData.Map);
-
+    readArchive(&GameData.Map);
+    DrawMap(&GameData.Map, hwnd);
+    /*
     while (gameover == 0)
     {
 
     }
-    
+    */
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
