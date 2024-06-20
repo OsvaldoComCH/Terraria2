@@ -10,9 +10,22 @@ typedef struct block
     int x;
     int y;
     int type;
-    char * img;
+    wchar_t * img;
 } block;
 
+// Função de definição da textura dos blocos
+void blockDefine(block * B)
+{
+    switch (B->type)
+    {
+    case 0:
+        B->img = L"imagens/grama.bmp";
+        break;
+    
+    default:
+        break;
+    }
+}
 /* 
 Função de leitura do arquivo de mapa, fazemos a construção do mapa do Ternaria por meio da leitura desse arquivo.
 */ 
@@ -26,25 +39,8 @@ void readArchive(LList *lista)
         ++count;
         block *bloco = malloc(sizeof(block));
         fscanf(File, "%i,%i,%i", &bloco->x, &bloco->y, &bloco->type);
+        blockDefine(bloco);
         LListAdd(lista, bloco);
     }
 }
-
-// Função de definição da textura dos blocos
-void blockDefine(block B)
-{
-    switch (B.type)
-    {
-    case 0:
-        B.img = 'Insira aqui o arquivo de imagem do bloco';
-        break;
-    
-    default:
-        break;
-    }
-}
-
-
-
-
 #endif 

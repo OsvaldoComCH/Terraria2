@@ -53,6 +53,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT PS;
             HDC hdc = BeginPaint(hwnd, &PS);
+            DrawImg(hdc, 0, 0, 960, 720, L"imagens/BackGround.bmp");
             EndPaint(hwnd, &PS);
         }
         break;
