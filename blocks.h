@@ -19,21 +19,16 @@ LList *readArchive(LList *lista)
 {
     int count = 0;
     FILE * File = fopen("Map.txt", "r");
-    LList lista;
     LListCreate(lista);
-
-    block bloco;
 
     while(!feof(File))
     {
         ++count;
-        fscanf(File, "%i,%i,%i", &bloco.x, &bloco.y, &bloco.type);
-        LListAdd(lista, &bloco);
+        block *bloco = malloc(sizeof(block));
+        fscanf(File, "%i,%i,%i", &bloco->x, &bloco->y, &bloco->type);
+        LListAdd(lista, bloco);
     }
-    for(int i = 0; i < 100; i++)
-    {
-        printf(LListGet(lista, i));
-    }
+    return lista;
 }
 
 
