@@ -4,6 +4,7 @@ gcc main.c -o Ternaria.exe -l gdi32 -l msimg32
 
 #include "imports.h"
 #include "render.c"
+#include "input.c"
 
 DWORD ThreadID;
 HANDLE Thread;
@@ -26,7 +27,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     player.ySubPos = 0;
     player.life = 10;
     player.damage = 1;
-    player.img = NULL;
+    player.img = "imagens/Ferzinho.bmp";
 
     zombie zombie;
     zombie.life = 12;
@@ -36,13 +37,13 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     LListCreate(&GameData.Map);
 
     readArchive(&GameData.Map);
-    DrawMap(&GameData.Map, hwnd);
-    /*
+    RenderMap(&GameData.Map, hwnd);
     while (gameover == 0)
     {
+        input(&player);
 
+        Sleep(20);
     }
-    */
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
@@ -91,7 +92,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         WClassName,
         L"Terraria 2",
         WS_OVERLAPPEDWINDOW,
-        200, 10, 960, 720,
+        200, 10, 975, 720,
         NULL, NULL, hInstance, NULL
     );
 
