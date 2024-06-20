@@ -15,11 +15,10 @@ typedef struct block
 /* 
 Função de leitura do arquivo de mapa, fazemos a construção do mapa do Ternaria por meio da leitura desse arquivo.
 */ 
-LList *readArchive(LList *lista)
+void readArchive(LList *lista)
 {
     int count = 0;
     FILE * File = fopen("Map.txt", "r");
-    LListCreate(lista);
 
     while(!feof(File))
     {
@@ -28,7 +27,6 @@ LList *readArchive(LList *lista)
         fscanf(File, "%i,%i,%i", &bloco->x, &bloco->y, &bloco->type);
         LListAdd(lista, bloco);
     }
-    return lista;
 }
 
 

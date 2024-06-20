@@ -16,6 +16,8 @@ struct ImportantStuff
 //Função da thread principal
 DWORD WINAPI MainThread(LPVOID lpParam)
 {
+    HWND hwnd = *((HWND *)lpParam);
+
     int gameover = 0;
     character player;
     player.xPos = 10;
@@ -31,7 +33,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     zombie.damage = 2;
     zombie.img = NULL;
 
-    HWND hwnd = *((HWND *)lpParam);
+    LListCreate(&GameData.Map);
 
     readArchive(&GameData.Map);
     DrawMap(&GameData.Map, hwnd);
@@ -98,7 +100,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return 0;
     }
 
-    HICON hIcon = (HICON)LoadImage(NULL, L"pixil-frame-0.ico", IMAGE_ICON, 0, 0, LR_LOADFROMFILE);
+    HICON hIcon = (HICON)LoadImage(NULL, L"imagens/iconeTernaria.ico", IMAGE_ICON, 0, 0, LR_LOADFROMFILE);
     
     if (hIcon != NULL) {
         // Definindo o ícone grande da janela
