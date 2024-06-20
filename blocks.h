@@ -43,4 +43,4 @@ void readArchive(LList *lista)
         LListAdd(lista, bloco);
     }
 }
-#endif 
+#endif
