@@ -20,14 +20,42 @@ void MoveRight(character * Player, int Pixels)
     }
 }
 
+void MoveUp(character * Player, int Pixels)
+{
+    Player->ySubPos -= Pixels;
+    if(Player->ySubPos < 0)
+    {
+        Player->yPos -= Player->ySubPos / 32 + 1;
+        Player->ySubPos = 32 - Player->ySubPos % 32;
+    }
+}
+
+void MoveDown(character * Player, int Pixels)
+{
+    Player->ySubPos += Pixels;
+    if(Player->ySubPos > 31)
+    {
+        Player->yPos += Player->ySubPos / 32;
+        Player->ySubPos = Player->ySubPos % 32;
+    }
+}
+
 void input(character * Player)
 {
     if(GetAsyncKeyState(VK_A))
     {
-        MoveLeft(Player, 3);
+        MoveLeft(Player, 5);
     }
     if(GetAsyncKeyState(VK_D))
     {
-        MoveRight(Player, 3);
+        MoveRight(Player, 5);
+    }
+    if(GetAsyncKeyState(VK_W))
+    {
+        MoveUp(Player, 5);
+    }
+    if(GetAsyncKeyState(VK_S))
+    {
+        MoveDown(Player, 5);
     }
 }
