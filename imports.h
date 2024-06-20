@@ -12,6 +12,8 @@ Essa header possui todos os imports que precisamos, para garantira que não vai 
 #define UNICODE
 #endif
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <windows.h>
 #include "VirtualKeyCodes.h"
 #include "Stack&Queue.h"
