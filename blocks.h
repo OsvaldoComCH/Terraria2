@@ -35,7 +35,7 @@ void blockDefine(block B)
 {
     switch (B.type)
     {
-    case 0:
+    case 1:
         B.img = 'Insira aqui o arquivo de imagem do bloco';
         break;
     
