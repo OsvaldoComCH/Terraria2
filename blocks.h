@@ -10,6 +10,7 @@ typedef struct block
     int x;
     int y;
     int type;
+    char * img;
 } block;
 
 /* 
@@ -33,6 +34,20 @@ LList *readArchive(LList *lista)
     for(int i = 0; i < 100; i++)
     {
         printf(LListGet(lista, i));
+    }
+}
+
+// Função de definição da textura dos blocos
+void blockDefine(block B)
+{
+    switch (B.type)
+    {
+    case 0:
+        B.img = 'Insira aqui o arquivo de imagem do bloco';
+        break;
+    
+    default:
+        break;
     }
 }
 
