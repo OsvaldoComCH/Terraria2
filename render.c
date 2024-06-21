@@ -3,23 +3,13 @@
 
 void RenderMap(const LList * Map, HDC hdc)
 {
-    block * B = (block *) Map->Head->Value;
-    BITMAP bm;
-    HBITMAP Image = (HBITMAP)LoadImage(NULL, B->img, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-    HDC BitmapDC = CreateCompatibleDC(hdc);
-    SelectObject(BitmapDC, Image);
-    GetObject((HGDIOBJ)Image, sizeof(bm), &bm);
-
     LLNode * N = Map->Head;
     for(int i = 0; i < Map->Size; ++i)
     {
-        B = (block *) N->Value;
-        TransparentBlt(hdc, B->x*32, 649 - (B->y*32), bm.bmWidth, bm.bmHeight, BitmapDC, 0, 0, 31, 31, RGB(255, 0, 255));
+        block * B = (block *) N->Value;
+        DrawImg(hdc, B->x*32, 649 - (B->y*32), 32, 32, B->img);
         N = N->Next;
     }
-    
-    DeleteDC(BitmapDC);
-    DeleteObject(Image);
 }
 
 void RenderPlayer(const character * Player, HDC hdc)
