@@ -2,7 +2,7 @@
 
 void MoveLeft(character * Player, int Pixels)
 {
-    Player->state ^ 1;
+    Player->state = Player->state ^ 1;
     Player->xSubPos -= Pixels;
     if(Player->xSubPos < 0)
     {
@@ -13,6 +13,7 @@ void MoveLeft(character * Player, int Pixels)
 
 void MoveRight(character * Player, int Pixels)
 {
+    Player->state = Player->state ^ 1;
     Player->xSubPos += Pixels;
     if(Player->xSubPos > 31)
     {
@@ -41,7 +42,7 @@ void MoveUp(character * Player, int Pixels)
     }
 }
 
-int Collision(const LList * Map, const character * Player, int Dir)//Dir - 0=Right, 1=Down, 2=Left, 3=Right
+int Collision(const LList * Map, const character * Player)
 {
     RECT PlayerRect, BlockRect, Intersection;
     PlayerRect.left = Player->xPos*32 + Player->xSubPos;
@@ -52,9 +53,12 @@ int Collision(const LList * Map, const character * Player, int Dir)//Dir - 0=Rig
     for(int i = 0; i < Map->Size; ++i)
     {
         block * Block = (block *) N->Value;
+        if(Block->x == Player->xPos + (Player->xSubPos - 16))
+        {
+            
+        }
 
-
-        IntersectRect();
+        IntersectRect(&Intersection, &BlockRect, &PlayerRect);
     }
 }
 

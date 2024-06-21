@@ -38,7 +38,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     HANDLE Timer = CreateWaitableTimer(NULL, 0, NULL);
     LARGE_INTEGER DueTime;
     DueTime.QuadPart = -200000;
-    SetWaitableTimer(Timer, &DueTime, 20, NULL, NULL, 0);
+    SetWaitableTimer(Timer, &DueTime, 50, NULL, NULL, 0);
     while(gameover == 0)
     {
         input(&player);
