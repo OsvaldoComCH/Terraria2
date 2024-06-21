@@ -24,14 +24,14 @@ void RenderMap(const LList * Map, HDC hdc)
 
 void RenderPlayer(const character * Player, HDC hdc)
 {
-    wchar_t * img
-    if(Player.state == 0)
+    wchar_t * img;
+    if(Player->state == 0)
     {
-        img = "imagens/Ferzinho3.bmp";
+        img = L"imagens/Ferzinho3.bmp";
     }
     else
     {
-        img = "imagens/Ferzinho.bmp";
+        img = L"imagens/Ferzinho3Andante.bmp";
     }
     DrawImg(hdc, Player->xPos*32 + Player->xSubPos, 649 - Player->yPos*32 - Player->ySubPos, 32, 64, img);
 }
