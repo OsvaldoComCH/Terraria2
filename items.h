@@ -13,6 +13,7 @@ typedef struct Sword
     int damage;
     int durability;
     int material;
+    wchar_t * img; 
 } Sword;
 
 typedef struct Pickaxe
