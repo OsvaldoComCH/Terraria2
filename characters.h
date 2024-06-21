@@ -13,7 +13,7 @@ typedef struct character
     int inventory[32];
     int life;
     int damage;
-    wchar_t * img;
+    int state;
 } character;
 
 /*
