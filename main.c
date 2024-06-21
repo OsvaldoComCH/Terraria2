@@ -34,18 +34,30 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     LListCreate(&Map);
     SetThreadPriority(Thread, 2);
     readArchive(&Map);
-    RenderMap(&Map, hwnd);
-    while (gameover == 0)
+    
+    HANDLE Timer = CreateWaitableTimer(NULL, 0, NULL);
+    LARGE_INTEGER DueTime;
+    DueTime.QuadPart = -200000;
+    SetWaitableTimer(Timer, &DueTime, 20, NULL, NULL, 0);
+    while(gameover == 0)
     {
-        SendMessage(hwnd, WM_SETREDRAW, FALSE, 0);
         input(&player);
         HDC hdc = GetDC(hwnd);
-        DrawImg(hdc, 0, 0, 960, 720, L"imagens/BackGround.bmp");
-        RenderMap(&Map, hwnd);
-        RenderPlayer(&player, hwnd);
-        SendMessage(hwnd, WM_SETREDRAW, TRUE, 0);
-        Sleep(20);
+        RECT R;
+        GetClientRect(hwnd, &R);
+        HDC TempDC = CreateCompatibleDC(hdc);
+        HBITMAP Bitmap = CreateCompatibleBitmap(hdc, (R.right-R.left), (R.bottom - R.top));
+        SelectObject(TempDC, Bitmap);
+
+        DrawImg(TempDC, 0, 0, 960, 720, L"imagens/BackGround.bmp");
+        RenderMap(&Map, TempDC);
+        RenderPlayer(&player, TempDC);
+
+        BitBlt(hdc, 0, 0, R.right-R.left, R.bottom-R.top, TempDC, 0, 0, SRCCOPY);
+        DeleteDC(TempDC);
+        DeleteObject(Bitmap);
         ReleaseDC(hwnd, hdc);
+        WaitForSingleObject(Timer, INFINITE);
     }
 }
 
@@ -63,7 +75,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT PS;
             HDC hdc = BeginPaint(hwnd, &PS);
             FillRect(hdc, &PS.rcPaint, CreateSolidBrush(RGB(255,255,255)));
-            //DrawImg(hdc, 0, 0, 960, 720, L"imagens/BackGround.bmp");
             EndPaint(hwnd, &PS);
         }
         break;

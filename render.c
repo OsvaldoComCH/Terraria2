@@ -1,9 +1,8 @@
 #include "imports.h"
 #include "functions.c"
 
-void RenderMap(const LList * Map, HWND hwnd)
+void RenderMap(const LList * Map, HDC hdc)
 {
-    HDC hdc = GetDC(hwnd);
     block * B = (block *) Map->Head->Value;
     BITMAP bm;
     HBITMAP Image = (HBITMAP)LoadImage(NULL, B->img, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
@@ -21,12 +20,9 @@ void RenderMap(const LList * Map, HWND hwnd)
     
     DeleteDC(BitmapDC);
     DeleteObject(Image);
-    ReleaseDC(hwnd, hdc);
 }
 
-void RenderPlayer(const character * Player, HWND hwnd)
+void RenderPlayer(const character * Player, HDC hdc)
 {
-    HDC hdc = GetDC(hwnd);
     DrawImg(hdc, Player->xPos*32 + Player->xSubPos, 649 - Player->yPos*32 - Player->ySubPos, 32, 64, Player->img);
-    ReleaseDC(hwnd, hdc);
 }
