@@ -41,7 +41,6 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     SetWaitableTimer(Timer, &DueTime, 20, NULL, NULL, 0);
     while(gameover == 0)
     {
-        input(&player);
         HDC hdc = GetDC(hwnd);
         RECT R;
         GetClientRect(hwnd, &R);
@@ -51,6 +50,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 
         DrawImg(TempDC, 0, 0, 960, 720, L"imagens/BackGround.bmp");
         RenderMap(&Map, TempDC);
+        input(&player, &Map);
         RenderPlayer(&player, TempDC);
 
         BitBlt(hdc, 0, 0, R.right-R.left, R.bottom-R.top, TempDC, 0, 0, SRCCOPY);
