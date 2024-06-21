@@ -53,12 +53,17 @@ int Collision(const LList * Map, const character * Player)
     for(int i = 0; i < Map->Size; ++i)
     {
         block * Block = (block *) N->Value;
-        if(Block->x == Player->xPos + (Player->xSubPos - 16))
+        if(Block->x == Player->xPos + ((Player->xSubPos - 16) < 0))
         {
-            
-        }
+            IntersectRect(&Intersection, &BlockRect, &PlayerRect);
+            if(Intersection.right - Intersection.left < )
+            {
 
-        IntersectRect(&Intersection, &BlockRect, &PlayerRect);
+            }else
+            {
+
+            }
+        }
     }
 }
 
