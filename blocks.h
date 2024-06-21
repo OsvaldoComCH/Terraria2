@@ -21,7 +21,11 @@ void blockDefine(block * B)
     case 1:
         B->img = L"imagens/grama.bmp";
         break;
-    
+
+    case 2:
+        B->img = L"imagens/terra.bmp";
+        break;
+        
     default:
         break;
     }
