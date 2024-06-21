@@ -2,6 +2,7 @@
 
 void MoveLeft(character * Player, int Pixels)
 {
+    Player->state ^ 1;
     Player->xSubPos -= Pixels;
     if(Player->xSubPos < 0)
     {
@@ -37,6 +38,23 @@ void MoveUp(character * Player, int Pixels)
     {
         Player->yPos += Player->ySubPos / 32;
         Player->ySubPos = Player->ySubPos % 32;
+    }
+}
+
+int Collision(const LList * Map, const character * Player, int Dir)//Dir - 0=Right, 1=Down, 2=Left, 3=Right
+{
+    RECT PlayerRect, BlockRect, Intersection;
+    PlayerRect.left = Player->xPos*32 + Player->xSubPos;
+    PlayerRect.bottom = 649 - Player->yPos*32 - Player->ySubPos;
+    PlayerRect.right = PlayerRect.left + 32;
+    PlayerRect.top = PlayerRect.bottom - 64;
+    LLNode * N = Map->Head;
+    for(int i = 0; i < Map->Size; ++i)
+    {
+        block * Block = (block *) N->Value;
+
+
+        IntersectRect();
     }
 }
 
