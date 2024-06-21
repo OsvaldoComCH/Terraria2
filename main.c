@@ -24,7 +24,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     player.ySubPos = 0;
     player.life = 10;
     player.damage = 1;
-    player.img = L"imagens/Ferzinho2.bmp";
+    player.img = L"imagens/Ferzinho3.bmp";
 
     zombie zombie;
     zombie.life = 12;
