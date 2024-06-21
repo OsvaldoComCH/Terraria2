@@ -76,6 +76,28 @@ void MoveUp(LList * Map, character * Player, int Pixels)
     }
 }
 
+void Jump(character * Player, int Pixels)
+{
+    if(Player->jump <= 0)
+    {
+        if(Player->canJump == 1)
+        {
+            Player->jump = 65;
+            Player->canJump = 0;
+        }
+    }
+    else
+    {
+        Player->jump -= 5;
+        MoveUp(Player, 5);
+    }
+}
+
+void Gravity(character * Player, int Pixels)
+{
+    MoveDown(Player, Pixels);
+}
+
 
 
 void input(character * Player, LList * Map)
