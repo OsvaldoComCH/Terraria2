@@ -24,6 +24,8 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     player.ySubPos = 0;
     player.life = 10;
     player.damage = 1;
+    player.jump = 0;
+    player.canJump = 1;
     player.state = 0;
 
     zombie zombie;

@@ -67,6 +67,29 @@ int Collision(const LList * Map, const character * Player)
     }
 }
 
+void Gravity(character * Player, int Pixels)
+{
+    MoveDown(Player, Pixels);
+}
+
+void Jump(character * Player, int Pixels)
+{
+    if(Player->jump <= 0)
+    {
+        if(Player->canJump == 1)
+        {
+            Player->jump = 70;
+            Player->canJump = 0;
+        }
+    }
+    else
+    {
+        Player->jump -= 10;
+        MoveUp(Player, 10);
+    }
+    Gravity(Player, 5);
+}
+
 void input(character * Player)
 {
     if(GetAsyncKeyState(VK_A))
@@ -84,5 +107,13 @@ void input(character * Player)
     if(GetAsyncKeyState(VK_S))
     {
         MoveDown(Player, 5);
+    }
+    if(GetAsyncKeyState(VK_SPACE))
+    {
+        Jump(Player, 5);
+    }
+    if(GetAsyncKeyState(VK_G))
+    {
+        Gravity(Player, 5);
     }
 }
