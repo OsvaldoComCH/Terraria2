@@ -30,7 +30,7 @@ int Collision(const LList * Map, const character * Player)
     }
 }
 
-void MoveLeft(LList * Map, character * Player, int Pixels)
+void MoveLeft(character * Player, int Pixels)
 {
     Player->state = Player->state ^ 1;
     Player->xSubPos -= Pixels;
@@ -45,7 +45,7 @@ void MoveLeft(LList * Map, character * Player, int Pixels)
     }*/
 }
 
-void MoveRight(LList * Map, character * Player, int Pixels)
+void MoveRight(character * Player, int Pixels)
 {
     Player->state = Player->state ^ 1;
     Player->xSubPos += Pixels;
@@ -56,7 +56,7 @@ void MoveRight(LList * Map, character * Player, int Pixels)
     }
 }
 
-void MoveDown(LList * Map, character * Player, int Pixels)
+void MoveDown(character * Player, int Pixels)
 {
     Player->ySubPos -= Pixels;
     if(Player->ySubPos < 0)
@@ -66,7 +66,7 @@ void MoveDown(LList * Map, character * Player, int Pixels)
     }
 }
 
-void MoveUp(LList * Map, character * Player, int Pixels)
+void MoveUp(character * Player, int Pixels)
 {
     Player->ySubPos += Pixels;
     if(Player->ySubPos > 31)
@@ -104,19 +104,19 @@ void input(character * Player, LList * Map)
 {
     if(GetAsyncKeyState(VK_A))
     {
-        MoveLeft(Map, Player, 5);
+        MoveLeft(Player, 5);
     }
     if(GetAsyncKeyState(VK_D))
     {
-        MoveRight(Map, Player, 5);
+        MoveRight(Player, 5);
     }
     if(GetAsyncKeyState(VK_W))
     {
-        MoveUp(Map, Player, 5);
+        MoveUp(Player, 5);
     }
     if(GetAsyncKeyState(VK_S))
     {
-        MoveDown(Map, Player, 5);
+        MoveDown(Player, 5);
     }
     if(GetAsyncKeyState(VK_SPACE))
     {
