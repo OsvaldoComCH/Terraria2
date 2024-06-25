@@ -1,20 +1,21 @@
 #include "imports.h"
-
-void DrawImg(HDC hdc, int PosX, int PosY, int Width, int Height, const wchar_t * ImgPath)
+//Desenha a imagem 
+void DrawImg(HDC hdc, const RECT * Rect, const wchar_t * ImgPath)
 {
     BITMAP bm;
     HBITMAP Image = (HBITMAP)LoadImage(NULL, ImgPath, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
     HDC BitmapDC = CreateCompatibleDC(hdc);
     SelectObject(BitmapDC, Image);
     GetObject((HGDIOBJ)Image, sizeof(bm), &bm);
-    TransparentBlt(hdc, PosX, PosY, bm.bmWidth, bm.bmHeight, BitmapDC, 0, 0, Width, Height, RGB(255, 0, 255));
+    TransparentBlt(hdc, Rect->left, Rect->top, bm.bmWidth, bm.bmHeight, BitmapDC,
+    0, 0, Rect->right - Rect->left, Rect->bottom - Rect->top, RGB(255, 0, 255));
     DeleteDC(BitmapDC);
     DeleteObject(Image);
 }
 
-void DrawRect(HDC hdc, int PosX, int PosY, int Width, int Height, COLORREF Color)
+void DrawRect(HDC hdc, const RECT * Rect, COLORREF Color)
 {
     SelectObject(hdc, GetStockObject(DC_BRUSH));
     SetDCBrushColor(hdc, Color);
-    Rectangle(hdc, PosX, PosY, PosX + Width, PosY + Height);
+    Rectangle(hdc, Rect->left, Rect->top, Rect->right, Rect->bottom);
 }

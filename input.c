@@ -1,78 +1,84 @@
 #include "imports.h"
 
-int Collision(const LList * Map, const character * Player)
+int Collision(const RECT * R1, const RECT * R2)
 {
-    RECT PlayerRect, BlockRect, Intersection;
-    PlayerRect.left = Player->xPos*32 + Player->xSubPos;
-    PlayerRect.top = 649 - Player->yPos*32 - Player->ySubPos;
-    PlayerRect.right = PlayerRect.left + 32;
-    PlayerRect.bottom = PlayerRect.top + 64;
-    LLNode * N = Map->Head;
-    for(int i = 0; i < Map->Size; ++i)
+    RECT Inter;
+    if(IntersectRect(&Inter, R1, R2))
     {
-        block * Block = (block *) N->Value;
-        if(Block->x == Player->xPos + ((Player->xSubPos - 16) < 0) && Block->y == Player->yPos + ((Player->ySubPos - 16) < 0))
+        if(Inter.right - Inter.left > Inter.bottom - Inter.top)
         {
-            BlockRect.left = Block->x*32;
-            BlockRect.top = 649 - Block->y*32;
-            BlockRect.right = BlockRect.left + 32;
-            BlockRect.bottom = BlockRect.top + 32;
-            IntersectRect(&Intersection, &BlockRect, &PlayerRect);
-            if(Intersection.right - Intersection.left && Intersection.top - Intersection.bottom)
-            {
-                return 1;
-            }else
-            {
-                return 0;
-            }
+            return 1;
+        }
+        else
+        {
+            return 2;
+        }
+    }
+    return 0;
+}
+
+block * MapCollision(const RECT * R)
+{
+    LLNode * N = Map.Head;
+    for(int i = 0; i < Map.Size; ++i)
+    {
+        block * B = N->Value;
+        if(Collision(&B->hitbox, R))
+        {
+            return B;
         }
         N = N->Next;
     }
+    return NULL;
 }
 
 void MoveLeft(character * Player, int Pixels)
 {
     Player->state = Player->state ^ 1;
-    Player->xSubPos -= Pixels;
-    if(Player->xSubPos < 0)
+    Player->hitbox.left -= Pixels;
+    Player->hitbox.right -= Pixels;
+    block * B = MapCollision(&Player->hitbox);
+    if(B != NULL)
     {
-        Player->xPos -= Player->xSubPos / 32 + 1;
-        Player->xSubPos = 32 - Player->xSubPos % 32;
+        Player->hitbox.left = B->hitbox.right;
+        Player->hitbox.right = Player->hitbox.left + 31;
     }
-    /*if(Collision(Map, Player))
-    {
-        Player->xSubPos = 31;
-    }*/
 }
 
 void MoveRight(character * Player, int Pixels)
 {
     Player->state = Player->state ^ 1;
-    Player->xSubPos += Pixels;
-    if(Player->xSubPos > 31)
+    Player->hitbox.left += Pixels;
+    Player->hitbox.right += Pixels;
+    block * B = MapCollision(&Player->hitbox);
+    if(B != NULL)
     {
-        Player->xPos += Player->xSubPos / 32;
-        Player->xSubPos = Player->xSubPos % 32;
+        Player->hitbox.right = B->hitbox.left;
+        Player->hitbox.left = Player->hitbox.right - 31;
     }
 }
 
 void MoveDown(character * Player, int Pixels)
 {
-    Player->ySubPos -= Pixels;
-    if(Player->ySubPos < 0)
+    Player->hitbox.top += Pixels;
+    Player->hitbox.bottom += Pixels;
+    block * B = MapCollision(&Player->hitbox);
+    if(B != NULL)
     {
-        Player->yPos -= Player->ySubPos / 32 + 1;
-        Player->ySubPos = 32 - Player->ySubPos % 32;
+        Player->hitbox.bottom = B->hitbox.top;
+        Player->hitbox.top = Player->hitbox.bottom - 63;
     }
 }
 
 void MoveUp(character * Player, int Pixels)
 {
-    Player->ySubPos += Pixels;
-    if(Player->ySubPos > 31)
+    Player->hitbox.top -= Pixels;
+    Player->hitbox.bottom -= Pixels;
+    block * B = MapCollision(&Player->hitbox);
+    if(B != NULL)
     {
-        Player->yPos += Player->ySubPos / 32;
-        Player->ySubPos = Player->ySubPos % 32;
+        Player->hitbox.top = B->hitbox.bottom;
+        Player->hitbox.bottom = Player->hitbox.top + 63;
     }
 }
 

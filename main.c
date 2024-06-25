@@ -15,13 +15,12 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 {
     HWND hwnd = *((HWND *)lpParam);
 
-    LList Map;
     int gameover = 0;
     character player;
-    player.xPos = 10;
-    player.yPos = 10;   
-    player.xSubPos = 0;
-    player.ySubPos = 0;
+    player.hitbox.left = 320;
+    player.hitbox.right = 351;
+    player.hitbox.top = 320;
+    player.hitbox.bottom = 383;
     player.life = 10;
     player.damage = 1;
     player.jump = 0;
@@ -34,13 +33,18 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     zombie.img = NULL;
 
     LListCreate(&Map);
-    SetThreadPriority(Thread, 2);
     readArchive(&Map);
     
+    /*
+    Normalmente, se usa um sleep para esperar uma determinada quantidade de tempo. As funções de sleep são
+    imprecisas, pois liberam a thread para o sistema operacional, que pode te devolver depois do prazo.
+    Os timers do Windows travam a thread, mas não a liberam, tornando-os muito precisos e eficientes.
+    */
     HANDLE Timer = CreateWaitableTimer(NULL, 0, NULL);
     LARGE_INTEGER DueTime;
     DueTime.QuadPart = -200000;
-    SetWaitableTimer(Timer, &DueTime, 20, NULL, NULL, 0);
+    SetWaitableTimer(Timer, &DueTime, 20, NULL, NULL, 0);//Timer com intervalo de 20ms
+
     while(gameover == 0)
     {
         HDC hdc = GetDC(hwnd);
@@ -50,7 +54,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
         HBITMAP Bitmap = CreateCompatibleBitmap(hdc, (R.right-R.left), (R.bottom - R.top));
         SelectObject(TempDC, Bitmap);
 
-        DrawImg(TempDC, 0, 0, 960, 720, L"imagens/BackGround.bmp");
+        DrawImg(TempDC, &R, L"imagens/BackGround.bmp");
         RenderMap(&Map, TempDC);
         input(&player, &Map);
         RenderPlayer(&player, TempDC);
@@ -59,19 +63,15 @@ DWORD WINAPI MainThread(LPVOID lpParam)
         DeleteDC(TempDC);
         DeleteObject(Bitmap);
         ReleaseDC(hwnd, hdc);
-        WaitForSingleObject(Timer, INFINITE);
+        WaitForSingleObject(Timer, INFINITE);//Aqui se espera até o timer terminar
     }
 }
 
+//Função para o tratamanto de mensagens
 LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
     switch(Msg)
     {
-        case WM_SETREDRAW:
-        {
-
-        }
-        break;
         case WM_PAINT:
         {
             PAINTSTRUCT PS;
@@ -94,7 +94,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-    const wchar_t WClassName[]  = L"Ternaria";
+    const wchar_t WClassName[] = L"Ternaria";
     MSG Msg;
     WNDCLASS Window = {};
     Window.lpfnWndProc = WndProc;
@@ -139,8 +139,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     ShowWindow(hwnd, nCmdShow);
     UpdateWindow(hwnd);
 
+    //Abrindo uma thread separada para rodar o jogo
     Thread = CreateThread(NULL, 0, MainThread, &hwnd, 0, &ThreadID);
 
+    //Loop para receber as mensagens da WINAPI
     while(GetMessage(&Msg, NULL, 0, 0))
     {
         TranslateMessage(&Msg);

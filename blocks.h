@@ -7,15 +7,20 @@
 // Estrutura dos blocos, especificando com posição e tipo.
 typedef struct block
 {
+    RECT hitbox;
     int x;
     int y;
     int type;
     wchar_t * img;
 } block;
 
-// Função de definição da textura dos blocos
+// Função de definição da textura e colisão dos blocos
 void blockDefine(block * B)
 {
+    B->hitbox.left = B->x*32;
+    B->hitbox.top = 649 - (B->y*32);
+    B->hitbox.right = B->hitbox.left + 32;
+    B->hitbox.bottom = B->hitbox.top + 32;
     switch (B->type)
     {
     case 1:

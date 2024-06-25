@@ -7,7 +7,7 @@ void RenderMap(const LList * Map, HDC hdc)
     for(int i = 0; i < Map->Size; ++i)
     {
         block * B = (block *) N->Value;
-        DrawImg(hdc, B->x*32, 649 - (B->y*32), 32, 32, B->img);
+        DrawImg(hdc, &B->hitbox, B->img);
         N = N->Next;
     }
 }
@@ -23,5 +23,5 @@ void RenderPlayer(const character * Player, HDC hdc)
     {
         img = L"imagens/Ferzinho3Andante.bmp";
     }
-    DrawImg(hdc, Player->xPos*32 + Player->xSubPos, 649 - Player->yPos*32 - Player->ySubPos, 32, 64, img);
+    DrawImg(hdc, &Player->hitbox, img);
 }

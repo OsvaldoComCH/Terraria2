@@ -8,8 +8,7 @@ A subposição serve para calcular colisões entre personagem e bloco.
 
 typedef struct character
 {
-    int xPos, yPos;
-    int xSubPos, ySubPos;
+    RECT hitbox;
     int inventory[32];
     int life;
     int damage;
@@ -24,10 +23,9 @@ Estrutura do zumbi.
 
 typedef struct zombie
 {
+    RECT hitbox;
     int life;
     int damage;
-    int xPos, yPos;
-    int xSubPos, ySubPos;
     wchar_t * img;
 } zombie;
 
